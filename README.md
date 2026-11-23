@@ -1,29 +1,21 @@
-# NEXUS HOST Mobile 0.1.0
+# NEXUS HOST Mobile
 
-Android-приложение на Kotlin + Jetpack Compose. В этой версии доступны экраны Dashboard, Console и Settings с нижней навигацией и тёмным оформлением.
+Android application preview built with Kotlin and Jetpack Compose.
 
-**Важно:** это пока UI-preview. Кнопки управления сервером и показатели демонстрационные; подключения к NEXUS HOST и удалённого управления ещё нет.
+## Build APK with GitHub Actions
 
-## Как получить APK без Android Studio
+1. Upload the **contents** of this folder to the root of a GitHub repository (not the enclosing folder).
+2. Keep `.github/workflows/android.yml` in place.
+3. Open the Actions tab and run **Build NEXUS HOST APK**.
+4. Download the `NEXUS-HOST-APK` artifact and extract `app-debug.apk`.
 
-В архив уже добавлен GitHub Actions workflow `.github/workflows/build-apk.yml`. Он автоматически собирает APK при загрузке проекта в репозиторий GitHub.
+## Project layout
 
-1. На компьютере открой [github.com](https://github.com) и войди в аккаунт (если аккаунта нет — создай).
-2. Создай новый репозиторий: **New repository**. Назови его `nexus-host-mobile`. Для простоты можно выбрать **Public**.
-3. Распакуй этот ZIP на компьютере. Загрузи **содержимое папки `nexus-host-mobile`**, а не сам ZIP, в созданный репозиторий. В GitHub нажми **Add file → Upload files**, перетащи файлы и папки проекта в окно загрузки и нажми **Commit changes**.
-4. Открой в репозитории вкладку **Actions**. Выбери workflow **Build NEXUS HOST APK**. Если сборка не стартовала автоматически, нажми **Run workflow → Run workflow**.
-5. Дождись завершения сборки со статусом зелёной галочки. Открой завершённый запуск workflow.
-6. Внизу страницы найди **Artifacts** и скачай `nexus-host-mobile-debug-apk`.
-7. На телефоне распакуй скачанный ZIP-архив артефакта. Внутри будет `app-debug.apk`. Открой его и подтверди установку. Android может попросить разрешить установку приложений из используемого файлового менеджера или браузера.
+- `settings.gradle.kts` includes `:app`.
+- Root `build.gradle.kts` declares Android and Kotlin Compose plugins.
+- `app/build.gradle.kts` applies `com.android.application` and enables Compose.
+- `.github/workflows/android.yml` builds `:app:assembleDebug` using JDK 17 and Gradle 8.9.
 
-## Сборка в Android Studio
+## Current functionality
 
-Открой папку проекта в Android Studio, дождись синхронизации Gradle и выбери **Build → Build APK(s)**. APK будет в `app/build/outputs/apk/debug/app-debug.apk`.
-
-## Технические сведения
-
-- Package: `com.nexushost.mobile`
-- Minimum Android: 8.0 (API 26)
-- Compile/Target SDK: 35
-- Java: 17
-- Gradle: 8.9
+This is a UI preview. Server status, console commands, and settings are local demo state. No real server connection or server-control API is implemented yet. The app does not request network access.
